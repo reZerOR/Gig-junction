@@ -54,7 +54,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <a className="bg-2 py-2 px-5 rounded-lg hover:bg-3 cursor-pointer">
-          Login
+          <NavLink to={"/login"}> Login</NavLink>
         </a>
       </div>
     </div>
