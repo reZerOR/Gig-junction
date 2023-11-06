@@ -1,0 +1,4 @@
+.link a:active {
+  background-color: aqua;
+  text-decoration: none;
+}

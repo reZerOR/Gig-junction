@@ -1,10 +1,13 @@
 import React from "react";
+import Banner from "./Banner/Banner";
+import FeaturedJob from "./FeaturedJob/FeaturedJob";
 
 const Home = () => {
   return (
-    <div>
-      <h2 className="font-bold text-white text-5xl">this is home</h2>
-    </div>
+    <>
+      <Banner></Banner>
+      <FeaturedJob></FeaturedJob>
+    </>
   );
 };
 
