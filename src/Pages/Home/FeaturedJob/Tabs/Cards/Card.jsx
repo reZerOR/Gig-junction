@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
 const Card = ({ card }) => {
-  const { job_title, deadline, max_price, min_price, img, description } = card;
+  const { _id, job_title, deadline, max_price, min_price, img, description } =
+    card;
   return (
     <div className="card w-96 bg-3 shadow-xl">
       <figure>
@@ -17,7 +18,7 @@ const Card = ({ card }) => {
           <span className="font-bold">Price:</span> {min_price}$ - {max_price}$
         </p>
         <div className="card-actions justify-end">
-          <Link className="w-full">
+          <Link to={`/job/${_id}`} className="w-full">
             <button className=" w-full flex justify-center gap-2 bg-4 py-3 rounded-lg items-center font-bold">
               Bid now <BsArrowRight className=" text-2xl"></BsArrowRight>
             </button>
