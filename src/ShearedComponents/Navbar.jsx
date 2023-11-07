@@ -22,17 +22,17 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-white" to={"/addjob"}>
+        <NavLink className="hover:text-white" to={"/mypostedjobs"}>
           My Posted Jobs
         </NavLink>
       </li>{" "}
       <li>
-        <NavLink className="hover:text-white" to={"/addjob"}>
+        <NavLink className="hover:text-white" to={"/mybids"}>
           My Bids
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-white" to={"/mybids"}>
+        <NavLink className="hover:text-white" to={"/bidrequests"}>
           Bid Requests
         </NavLink>
       </li>

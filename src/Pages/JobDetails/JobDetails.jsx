@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { PiArrowElbowRightDownBold } from "react-icons/pi";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/Provider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const JobDetails = () => {
   const card = useLoaderData();
   const { user } = useContext(authContext);
-  const disabled = "disabled";
+  const navigate = useNavigate();
   const {
     img,
     buyer_email,
@@ -16,6 +18,32 @@ const JobDetails = () => {
     max_price,
     min_price,
   } = card;
+
+  const handleBid = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const price = form.price.value;
+    const deadline = form.date.value;
+    const newJob = {
+      email: user?.email,
+      buyer_email,
+      img,
+      job_title,
+      deadline,
+      price,
+    };
+    axios.post("http://localhost:5000/bids", newJob).then((res) => {
+      if (res.data?.insertedId) {
+        navigate("/mybids");
+        Swal.fire({
+          title: "Success!",
+          text: "Your bid is added to the Database successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      }
+    });
+  };
   return (
     <div className="min-h-screen">
       <div className="card rounded-none md:rounded-lg flex-col md:flex-row justify-center items-center max-w-7xl mx-auto card-side bg-2 shadow-xl">
@@ -41,7 +69,10 @@ const JobDetails = () => {
         <h2 className="font-bold">Bids Form</h2>
         <PiArrowElbowRightDownBold className="mt-3"></PiArrowElbowRightDownBold>
       </div>
-      <form className="p-10 mt-10 mx-auto rounded-xl bg-2 max-w-xl md:max-w-7xl">
+      <form
+        onSubmit={handleBid}
+        className="p-10 mt-10 mx-auto rounded-xl bg-2 max-w-xl md:max-w-7xl"
+      >
         <div className="flex flex-col md:flex-row justify-between my-6 gap-6">
           <div className="form-control w-full">
             <label className="label">
