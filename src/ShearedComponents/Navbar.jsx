@@ -5,7 +5,6 @@ import profile from "../assets/user.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(authContext);
-  console.log(user?.photoURL);
 
   const handleLogOut = () => {
     logOut().then().catch();
