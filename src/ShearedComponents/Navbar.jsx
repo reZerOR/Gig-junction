@@ -1,6 +1,15 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { authContext } from "../Provider/Provider";
+import profile from "../assets/user.png";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(authContext);
+  console.log(user?.photoURL);
+
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
   const links = (
     <>
       <li>
@@ -14,8 +23,18 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-white" to={"/mybids"}>
+        <NavLink className="hover:text-white" to={"/addjob"}>
+          My Posted Jobs
+        </NavLink>
+      </li>{" "}
+      <li>
+        <NavLink className="hover:text-white" to={"/addjob"}>
           My Bids
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className="hover:text-white" to={"/mybids"}>
+          Bid Requests
         </NavLink>
       </li>
     </>
@@ -53,9 +72,31 @@ const Navbar = () => {
         <ul className="menu menu-horizontal font-bold  px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="bg-2 py-2 px-5 rounded-lg hover:bg-3 cursor-pointer">
-          <NavLink to={"/login"}> Login</NavLink>
-        </a>
+        {user ? (
+          <>
+            <h2>{user.displayName}</h2>
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src={user.photoURL ? user.photoURL : profile} />
+              </div>
+            </label>
+            <a
+              onClick={handleLogOut}
+              className="bg-2 py-2 px-5 rounded-lg hover:bg-3 cursor-pointer"
+            >
+              Log out
+            </a>
+          </>
+        ) : (
+          <>
+            <NavLink
+              className="bg-2 py-2 px-5 rounded-lg hover:bg-3 cursor-pointer"
+              to={"/login"}
+            >
+              Login
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   );
