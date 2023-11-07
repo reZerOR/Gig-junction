@@ -1,0 +1,12 @@
+.react-tabs__tab--selected {
+  background-color: aquamarine;
+}
+.tab {
+  border-radius: 5px;
+  outline: none;
+  font-weight: medium;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  list-style: none;
+}
