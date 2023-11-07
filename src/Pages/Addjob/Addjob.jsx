@@ -1,16 +1,59 @@
 import React, { useContext } from "react";
 import { PiArrowElbowRightDownBold } from "react-icons/pi";
 import { authContext } from "../../Provider/Provider";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Addjob = () => {
   const { user } = useContext(authContext);
+  const navigate = useNavigate();
+  const handleAddJob = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const buyer_email = form.email.value;
+    const job_title = form.jobtitle.value;
+    const min_price = form.minprice.value;
+    const max_price = form.maxprice.value;
+    const img = form.img.value;
+    const category = form.category.value;
+    const deadline = form.date.value;
+    const description = form.description.value;
+    const newJob = {
+      img,
+      job_title,
+      buyer_email,
+      min_price,
+      max_price,
+      category,
+      deadline,
+      description,
+    };
+
+    console.log(newJob);
+
+    axios.post("http://localhost:5000/jobs", newJob).then((res) => {
+      if (res.data?.insertedId) {
+        Swal.fire({
+          title: "Success!",
+          text: "job added to the database",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        navigate("/mypostedjobs");
+      }
+    });
+  };
   return (
     <div className="max-w-7xl mx-auto">
       <div className="max-w-7xl mt-10 mx-auto gap-3 text-4xl text-white flex">
         <h2 className="font-bold">Want To Post A Job?</h2>
         <PiArrowElbowRightDownBold className="mt-3"></PiArrowElbowRightDownBold>
       </div>
-      <form className="p-10 mt-10 mx-auto rounded-xl bg-2 max-w-xl md:max-w-7xl">
+      <form
+        onSubmit={handleAddJob}
+        className="p-10 mt-10 mx-auto rounded-xl bg-2 max-w-xl md:max-w-7xl"
+      >
         <h2 className="text-center font-bold text-4xl text-white">Add Job</h2>
         <div className="flex flex-col md:flex-row justify-between my-6 gap-6">
           <div className="form-control w-full">
