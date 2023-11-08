@@ -32,7 +32,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-white" to={"/bidrequests"}>
+        <NavLink className="hover:text-white" to={"/bidrequest"}>
           Bid Requests
         </NavLink>
       </li>

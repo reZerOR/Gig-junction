@@ -11,12 +11,13 @@ const MyBids = () => {
       setBids(res.data);
     });
   }, [user]);
+  console.log(bids);
   return (
     <div className="max-w-7xl mx-auto">
       <h2 className="text-4xl my-20 text-white font-bold text-center">
         Your Bids
       </h2>
-      {bids ? (
+      {bids.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
