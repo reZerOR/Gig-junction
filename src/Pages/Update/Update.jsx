@@ -45,7 +45,7 @@ const Update = () => {
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           title: "Success!",
-          text: "job added to the database",
+          text: "job data is updated",
           icon: "success",
           confirmButtonText: "Ok",
         });

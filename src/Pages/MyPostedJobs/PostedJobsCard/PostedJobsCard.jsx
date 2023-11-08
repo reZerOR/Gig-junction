@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PostedJobsCard = ({ card }) => {
+const PostedJobsCard = ({ card, handleDelete }) => {
   const { _id, job_title, deadline, max_price, min_price, img, description } =
     card;
+
   return (
     <div className="card w-96 bg-3 shadow-xl">
       <figure>
