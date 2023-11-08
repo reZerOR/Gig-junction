@@ -1,8 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 const TableRow = ({ card }) => {
   console.log(card);
-  const { email, job_title, deadline, status } = card;
+  const { _id, email, job_title, deadline, status } = card;
+  const [tempStatus, setTampStatus] = useState(status);
+
+  const handleComplete = () => {
+    const accept = {
+      status: "complete",
+      buyer_status: "complete",
+    };
+    axios.put(`http://localhost:5000/bidrequest/${_id}`, accept).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        setTampStatus("complete");
+      }
+    });
+  };
 
   return (
     <tr className="text-base">
@@ -11,10 +25,12 @@ const TableRow = ({ card }) => {
       </td>
       <td>{email}</td>
       <td>{deadline}</td>
-      <td>{status}</td>
+      <td>{tempStatus}</td>
       <th>
-        {status === "in progress" && (
-          <button className="btn btn-ghost btn-xs">Complete</button>
+        {tempStatus === "in progress" && (
+          <button onClick={handleComplete} className="bg-4 p-2 rounded-lg">
+            Complete
+          </button>
         )}
       </th>
     </tr>

@@ -9,10 +9,12 @@ import Addjob from "../Pages/Addjob/Addjob";
 import MyPostedJobs from "../Pages/MyPostedJobs/MyPostedJobs";
 import Update from "../Pages/Update/Update";
 import BidRequest from "../Pages/BidRequest/BidRequest";
+import Error from "../Pages/Error/Error";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
