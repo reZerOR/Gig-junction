@@ -4,12 +4,19 @@ import { authContext } from "../../Provider/Provider";
 import PostedJobsCard from "./PostedJobsCard/PostedJobsCard";
 import Swal from "sweetalert2";
 
+import { Helmet } from "react-helmet-async";
+
 const MyPostedJobs = () => {
   const [jobs, setJobs] = useState([]);
   const { user } = useContext(authContext);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/mypostedjobs/${user?.email}`)
+      .get(
+        `https://gigjunction-server.vercel.app/mypostedjobs/${user?.email}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setJobs(res.data);
       });
@@ -27,18 +34,23 @@ const MyPostedJobs = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // DELETE FROM DATABASE
-        axios.delete(`http://localhost:5000/deletejob/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            const remaining = jobs.filter((item) => item._id !== id);
-            setJobs(remaining);
-          }
-        });
+        axios
+          .delete(`https://gigjunction-server.vercel.app/deletejob/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const remaining = jobs.filter((item) => item._id !== id);
+              setJobs(remaining);
+            }
+          });
       }
     });
   };
   return (
-    <div className="max-w-7xl mx-auto mt">
+    <div className="max-w-7xl mx-auto">
+      <Helmet>
+        <title>Gig Junk | My Posted Jobs</title>
+      </Helmet>
       <h2 className="text-4xl my-10 font-bold text-white text-center">
         Your Posted Jobs
       </h2>

@@ -10,6 +10,8 @@ import MyPostedJobs from "../Pages/MyPostedJobs/MyPostedJobs";
 import Update from "../Pages/Update/Update";
 import BidRequest from "../Pages/BidRequest/BidRequest";
 import Error from "../Pages/Error/Error";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import axios from "axios";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,31 +32,55 @@ const router = createBrowserRouter([
       },
       {
         path: "/job/:id",
-        element: <JobDetails></JobDetails>,
+        element: (
+          <PrivateRoute>
+            <JobDetails></JobDetails>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/jobs/${params.id}`),
+          fetch(`https://gigjunction-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/mybids",
-        element: <MyBids></MyBids>,
+        element: (
+          <PrivateRoute>
+            <MyBids></MyBids>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addjob",
-        element: <Addjob></Addjob>,
+        element: (
+          <PrivateRoute>
+            <Addjob></Addjob>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/mypostedjobs",
-        element: <MyPostedJobs></MyPostedJobs>,
+        element: (
+          <PrivateRoute>
+            <MyPostedJobs></MyPostedJobs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update/:id",
-        element: <Update></Update>,
+        element: (
+          <PrivateRoute>
+            <Update></Update>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/jobs/${params.id}`),
+          fetch(`https://gigjunction-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/bidrequest",
-        element: <BidRequest></BidRequest>,
+        element: (
+          <PrivateRoute>
+            <BidRequest></BidRequest>
+          </PrivateRoute>
+        ),
       },
     ],
   },

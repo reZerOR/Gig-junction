@@ -4,6 +4,7 @@ import { authContext } from "../../Provider/Provider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Addjob = () => {
   const { user } = useContext(authContext);
@@ -32,20 +33,25 @@ const Addjob = () => {
 
     console.log(newJob);
 
-    axios.post("http://localhost:5000/jobs", newJob).then((res) => {
-      if (res.data?.insertedId) {
-        Swal.fire({
-          title: "Success!",
-          text: "job added to the database",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-        navigate("/mypostedjobs");
-      }
-    });
+    axios
+      .post("https://gigjunction-server.vercel.app/jobs", newJob)
+      .then((res) => {
+        if (res.data?.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "job added to the database",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          navigate("/mypostedjobs");
+        }
+      });
   };
   return (
     <div className="max-w-7xl mx-auto">
+      <Helmet>
+        <title>Gig Junk | Add Job</title>
+      </Helmet>
       <div className="max-w-7xl mt-10 mx-auto gap-3 text-4xl text-white flex">
         <h2 className="font-bold">Want To Post A Job?</h2>
         <PiArrowElbowRightDownBold className="mt-3"></PiArrowElbowRightDownBold>

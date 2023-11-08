@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/Provider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,6 +51,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Gig Junk | Login</title>
+      </Helmet>
       <div className="mt-28 bg-2  shadow-xl max-w-md mx-auto rounded-xl">
         <h2 className="text-5xl pt-10 text-white text-center font-bold">
           Please Login!

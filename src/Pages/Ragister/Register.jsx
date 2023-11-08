@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { authContext } from "../../Provider/Provider";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { createUser } = useContext(authContext);
@@ -55,6 +56,9 @@ const Register = () => {
   };
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Gig Junk | Register</title>
+      </Helmet>
       <div className="mt-28 bg-2  shadow-xl max-w-md mx-auto rounded-xl">
         <h2 className="text-5xl pt-10 text-white text-center font-bold">
           Please Register!

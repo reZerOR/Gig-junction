@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/Provider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const JobDetails = () => {
   const card = useLoaderData();
@@ -34,20 +35,25 @@ const JobDetails = () => {
       status: "pending",
       buyer_status: "pending",
     };
-    axios.post("http://localhost:5000/bids", newJob).then((res) => {
-      if (res.data?.insertedId) {
-        navigate("/mybids");
-        Swal.fire({
-          title: "Success!",
-          text: "Your bid is added to the Database successfully",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-      }
-    });
+    axios
+      .post("https://gigjunction-server.vercel.app/bids", newJob)
+      .then((res) => {
+        if (res.data?.insertedId) {
+          navigate("/mybids");
+          Swal.fire({
+            title: "Success!",
+            text: "Your bid is added to the Database successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+      });
   };
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Gig Junk | Job Details</title>
+      </Helmet>
       <div className="card rounded-none md:rounded-lg flex-col md:flex-row justify-center items-center max-w-7xl mx-auto card-side bg-2 shadow-xl">
         <figure className="max-w-xs px-6 ">
           <img

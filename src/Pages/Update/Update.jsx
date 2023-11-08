@@ -4,6 +4,7 @@ import { authContext } from "../../Provider/Provider";
 import { PiArrowElbowRightDownBold } from "react-icons/pi";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Update = () => {
   const navigate = useNavigate();
@@ -41,20 +42,25 @@ const Update = () => {
       description,
     };
 
-    axios.put(`http://localhost:5000/updatejob/${_id}`, newJob).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        Swal.fire({
-          title: "Success!",
-          text: "job data is updated",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-      }
-      navigate("/mypostedjobs");
-    });
+    axios
+      .put(`https://gigjunction-server.vercel.app/updatejob/${_id}`, newJob)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "job data is updated",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+        navigate("/mypostedjobs");
+      });
   };
   return (
     <div className="max-w-7xl mx-auto">
+      <Helmet>
+        <title>Gig Junk | Update</title>
+      </Helmet>
       <div className="max-w-7xl mt-10 mx-auto gap-3 text-4xl text-white flex">
         <h2 className="font-bold">Want To Update The Job?</h2>
         <PiArrowElbowRightDownBold className="mt-3"></PiArrowElbowRightDownBold>

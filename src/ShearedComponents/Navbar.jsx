@@ -85,9 +85,9 @@ const Navbar = () => {
             </label>
             <a
               onClick={handleLogOut}
-              className="bg-2 py-2 px-5 rounded-lg hover:bg-3 cursor-pointer"
+              className="bg-2  py-2 px-5 rounded-lg hover:bg-3 cursor-pointer"
             >
-              Log out
+              SignOut
             </a>
           </>
         ) : (

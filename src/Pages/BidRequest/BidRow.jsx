@@ -11,22 +11,26 @@ const BidRow = ({ card }) => {
       status: "in progress",
       buyer_status: "in progress",
     };
-    axios.put(`http://localhost:5000/bidrequest/${_id}`, accept).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        setTampStatus("in progress");
-      }
-    });
+    axios
+      .put(`https://gigjunction-server.vercel.app/bidrequest/${_id}`, accept)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          setTampStatus("in progress");
+        }
+      });
   };
   const handleReject = () => {
     const accept = {
       status: "canceled",
       buyer_status: "rejected",
     };
-    axios.put(`http://localhost:5000/bidrequest/${_id}`, accept).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        setTampStatus("rejected");
-      }
-    });
+    axios
+      .put(`https://gigjunction-server.vercel.app/bidrequest/${_id}`, accept)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          setTampStatus("rejected");
+        }
+      });
   };
 
   return (

@@ -11,11 +11,13 @@ const TableRow = ({ card }) => {
       status: "complete",
       buyer_status: "complete",
     };
-    axios.put(`http://localhost:5000/bidrequest/${_id}`, accept).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        setTampStatus("complete");
-      }
-    });
+    axios
+      .put(`https://gigjunction-server.vercel.app/bidrequest/${_id}`, accept)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          setTampStatus("complete");
+        }
+      });
   };
 
   return (

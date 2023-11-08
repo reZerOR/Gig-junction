@@ -2,13 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Provider/Provider";
 import axios from "axios";
 import BidRow from "./BidRow";
+import { Helmet } from "react-helmet-async";
 
 const BidRequest = () => {
   const [bids, setBids] = useState([]);
   const { user } = useContext(authContext);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/bidrequest?email=${user?.email}`)
+      .get(
+        `https://gigjunction-server.vercel.app/bidrequest?email=${user?.email}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setBids(res.data);
       });
@@ -16,6 +22,9 @@ const BidRequest = () => {
   console.log(bids);
   return (
     <div className="max-w-7xl mx-auto">
+      <Helmet>
+        <title>Gig Junk | Bid Request</title>
+      </Helmet>
       <h2 className="text-5xl my-20 font-bold text-center text-white">
         Bid Requests
       </h2>
