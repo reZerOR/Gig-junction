@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/Provider";
 import { PiArrowElbowRightDownBold } from "react-icons/pi";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Update = () => {
   const navigate = useNavigate();
@@ -40,9 +41,17 @@ const Update = () => {
       description,
     };
 
-    axios
-      .put(`http://localhost:5000/updatejob/${_id}`, newJob)
-      .then((res) => {});
+    axios.put(`http://localhost:5000/updatejob/${_id}`, newJob).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          title: "Success!",
+          text: "job added to the database",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      }
+      navigate("/mypostedjobs");
+    });
   };
   return (
     <div className="max-w-7xl mx-auto">
