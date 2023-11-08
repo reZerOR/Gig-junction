@@ -23,7 +23,10 @@ const PostedJobsCard = ({ card, handleDelete }) => {
               Update
             </button>
           </Link>
-          <button className=" w-full flex justify-center gap-2 bg-2 py-3 rounded-lg items-center font-bold">
+          <button
+            onClick={() => handleDelete(_id)}
+            className=" w-full flex justify-center gap-2 bg-2 py-3 rounded-lg items-center font-bold"
+          >
             Delete
           </button>
         </div>

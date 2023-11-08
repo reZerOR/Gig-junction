@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Provider/Provider";
 import PostedJobsCard from "./PostedJobsCard/PostedJobsCard";
+import Swal from "sweetalert2";
 
 const MyPostedJobs = () => {
   const [jobs, setJobs] = useState([]);

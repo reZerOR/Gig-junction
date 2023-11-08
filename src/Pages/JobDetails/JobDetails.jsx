@@ -31,6 +31,8 @@ const JobDetails = () => {
       job_title,
       deadline,
       price,
+      status: "pending",
+      buyer_status: "pending",
     };
     axios.post("http://localhost:5000/bids", newJob).then((res) => {
       if (res.data?.insertedId) {
