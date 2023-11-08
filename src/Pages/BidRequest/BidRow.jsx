@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
+import "react-step-progress-bar/styles.css";
+import { ProgressBar } from "react-step-progress-bar";
 
 const BidRow = ({ card }) => {
   const { _id, buyer_status, email, job_title, deadline } = card;
@@ -36,7 +38,7 @@ const BidRow = ({ card }) => {
       <td>{deadline}</td>
       <td>{tempStatus}</td>
       <th>
-        {tempStatus === "pending" && (
+        {tempStatus === "pending" ? (
           <div className="flex gap-1 flex-col">
             <button onClick={handleAccept} className="bg-4 p-2 rounded-lg">
               Accept
@@ -45,6 +47,20 @@ const BidRow = ({ card }) => {
               Reject
             </button>
           </div>
+        ) : tempStatus === "in progress" ? (
+          <ProgressBar
+            percent={45}
+            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+            transition="scale"
+          />
+        ) : (
+          tempStatus === "complete" && (
+            <ProgressBar
+              percent={100}
+              filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+              transition="scale"
+            />
+          )
         )}
       </th>
     </tr>
