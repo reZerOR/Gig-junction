@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/Provider";
 import { PiArrowElbowRightDownBold } from "react-icons/pi";
+import axios from "axios";
 
 const Update = () => {
   const navigate = useNavigate();
@@ -39,7 +40,9 @@ const Update = () => {
       description,
     };
 
-    console.log(newJob);
+    axios
+      .put(`http://localhost:5000/updatejob/${_id}`, newJob)
+      .then((res) => {});
   };
   return (
     <div className="max-w-7xl mx-auto">
